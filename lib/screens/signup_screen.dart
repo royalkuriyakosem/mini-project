@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:aidify/services/supabase_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -15,6 +16,47 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
+  bool _isLoading = false;
+
+  Future<void> _signUp() async {
+    if (_formKey.currentState!.validate()) {
+      setState(() => _isLoading = true);
+      try {
+        final response = await SupabaseService.signUp(
+          email: emailController.text,
+          password: passwordController.text,
+          fullName: nameController.text,
+        );
+        
+        if (mounted) {
+          if (response.user != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Please check your email to confirm your account'),
+                backgroundColor: Colors.green,
+              ),
+            );
+            Navigator.pushReplacementNamed(context, '/login');
+          } else {
+            throw 'Signup failed';
+          }
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Error: ${e.toString()}'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      } finally {
+        if (mounted) {
+          setState(() => _isLoading = false);
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,15 +139,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Perform sign-up action (e.g., Firebase Authentication)
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Account Created Successfully')),
-                          );
-                        }
-                      },
-                      child: const Text('Sign Up', style: TextStyle(fontSize: 18)),
+                      onPressed: _isLoading ? null : _signUp,
+                      child: _isLoading
+                          ? const CircularProgressIndicator()
+                          : const Text('Sign Up', style: TextStyle(fontSize: 18)),
                     ),
                   ),
 
@@ -115,7 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Center(
                     child: TextButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pushReplacementNamed(context, '/login');
                       },
                       child: const Text('Already have an account? Log in'),
                     ),
