@@ -32,6 +32,11 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+.packages
+package-config.json
+generated_plugin_registrant.dart
+.metadata
+.flutter-plugins-hidden
 
 # Symbolication related
 app.*.symbols
@@ -43,3 +48,16 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+.gradle/
+
+# Android related
+**/android/key.properties
+**/android/app/keystore.jks
+
+# iOS related
+**/ios/Pods/
+
+# Firebase related (if using Firebase)
+**/android/app/google-services.json
+**/ios/Runner/GoogleService-Info.plist
+**/firebase_options.dart
