@@ -6,10 +6,11 @@ import 'services/auth_state_handler.dart';
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/home_screen.dart';
-import 'screens/text_to_speech_screen.dart';
-import 'screens/speech_to_text_screen.dart';
-import 'screens/object_detection_screen.dart';
 import 'screens/settings_screen.dart';
+import 'screens/splash_screen.dart';
+import 'screens/getting_started_screen.dart';
+import 'screens/color_detection_screen.dart';
+import 'screens/ocr_screen.dart';
 
 void main() async {
   // Ensure Flutter bindings are initialized
@@ -47,13 +48,14 @@ class AidifyApp extends StatelessWidget {
       ),
       home: const AuthStateHandler(),
       routes: {
+        '/getting-started': (context) => const GettingStartedScreen(),
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/home': (context) => const HomeScreen(),
-        '/text-to-speech': (context) => const TextToSpeechScreen(),
-        '/speech-to-text': (context) => const SpeechToTextScreen(),
-        '/object-detection': (context) => const ObjectDetectionScreen(),
         '/settings': (context) => const SettingsScreen(),
+        '/splash': (context) => const SplashScreen(),
+        '/color-detection': (context) => const ColorDetectionScreen(),
+        '/ocr': (context) => const OCRScreen(),
       },
     );
   }

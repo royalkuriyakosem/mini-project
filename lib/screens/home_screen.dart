@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:aidify/services/supabase_service.dart';
-import 'accessibility_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Aidify Features'),
+        title: const Text('Dashboard'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -21,38 +20,88 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
+        child: Column(
           children: [
-            _buildFeatureCard(
-              context,
-              'Text to Speech',
-              Icons.record_voice_over,
-              'Convert text to spoken words',
-              () => Navigator.pushNamed(context, '/text-to-speech'),
+            const Text(
+              'Quick Access to Features',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            _buildFeatureCard(
-              context,
-              'Speech to Text',
-              Icons.mic,
-              'Convert speech to written text',
-              () => Navigator.pushNamed(context, '/speech-to-text'),
+            const SizedBox(height: 10),
+            GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _buildFeatureCard(
+                  context,
+                  'Color Detection',
+                  Icons.color_lens,
+                  'Identify colors in real-time',
+                  () => Navigator.pushNamed(context, '/color-detection'),
+                ),
+                _buildFeatureCard(
+                  context,
+                  'OCR',
+                  Icons.text_fields,
+                  'Extract text from images',
+                  () => Navigator.pushNamed(context, '/ocr'),
+                ),
+                _buildFeatureCard(
+                  context,
+                  'Translation',
+                  Icons.translate,
+                  'Translate text in real-time',
+                  () => Navigator.pushNamed(context, '/translation'),
+                ),
+                _buildFeatureCard(
+                  context,
+                  'Sign Language Recognition',
+                  Icons.handyman,
+                  'Recognize sign language gestures',
+                  () => Navigator.pushNamed(context, '/sign-language'),
+                ),
+              ],
             ),
-            _buildFeatureCard(
-              context,
-              'Object Detection',
-              Icons.camera_alt,
-              'Identify objects using camera',
-              () => Navigator.pushNamed(context, '/object-detection'),
+            const SizedBox(height: 20),
+            const Text(
+              'Recent Activities',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            _buildFeatureCard(
-              context,
-              'Settings',
-              Icons.settings,
-              'Customize app settings',
-              () => Navigator.pushNamed(context, '/settings'),
+            // Placeholder for recent activities
+            Expanded(
+              child: ListView.builder(
+                itemCount: 5, // Example count
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text('Activity ${index + 1}'),
+                    subtitle: Text('Details about activity ${index + 1}'),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Implement voice assistant functionality
+              },
+              child: const Text('🎙 Voice Assistant'),
+            ),
+            const SizedBox(height: 20),
+            TextButton(
+              onPressed: () {
+                // Navigate to accessibility settings
+                Navigator.pushNamed(context, '/settings');
+              },
+              child: const Text('🏷 Personalized Accessibility Settings'),
+            ),
+            const SizedBox(height: 20),
+            TextButton(
+              onPressed: () {
+                // Implement multi-user profiles functionality
+              },
+              child: const Text('📂 Multi-User Profiles'),
             ),
           ],
         ),

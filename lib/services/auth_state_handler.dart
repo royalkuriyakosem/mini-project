@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/login_screen.dart';
 import '../screens/home_screen.dart';
+import '../screens/getting_started_screen.dart';
 
 class AuthStateHandler extends StatefulWidget {
   const AuthStateHandler({super.key});
@@ -11,7 +13,6 @@ class AuthStateHandler extends StatefulWidget {
 }
 
 class _AuthStateHandlerState extends State<AuthStateHandler> {
-  late final Stream<AuthState> _authStateStream;
   bool _initialized = false;
 
   @override
@@ -21,13 +22,26 @@ class _AuthStateHandlerState extends State<AuthStateHandler> {
   }
 
   Future<void> _initialize() async {
-    // Check if there's an existing session
     final session = Supabase.instance.client.auth.currentSession;
-    if (mounted) {
+    final prefs = await SharedPreferences.getInstance();
+    final bool hasSeenGettingStarted =
+        prefs.getBool('hasSeenGettingStarted') ?? false;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (session != null) {
+        // User is logged in, navigate to HomeScreen
+        Navigator.of(context).pushReplacementNamed('/home');
+      } else if (!hasSeenGettingStarted) {
+        // User has not seen Getting Started, navigate to Getting Started Screen
+        Navigator.of(context).pushReplacementNamed('/getting-started');
+      } else {
+        // User is not logged in and has seen Getting Started, navigate to LoginScreen
+        Navigator.of(context).pushReplacementNamed('/login');
+      }
       setState(() {
         _initialized = true;
       });
-    }
+    });
   }
 
   @override
@@ -36,15 +50,6 @@ class _AuthStateHandlerState extends State<AuthStateHandler> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    return StreamBuilder<AuthState>(
-      stream: Supabase.instance.client.auth.onAuthStateChange,
-      builder: (context, snapshot) {
-        final session = Supabase.instance.client.auth.currentSession;
-        if (session == null) {
-          return const LoginScreen();
-        }
-        return const HomeScreen();
-      },
-    );
+    return Container(); // This will not be used as navigation happens in _initialize
   }
-} 
+}

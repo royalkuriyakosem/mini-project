@@ -4,7 +4,8 @@ class SupabaseService {
   static Future<void> initialize() async {
     await Supabase.initialize(
       url: 'https://ughgxfagtdxfzyjsyaeu.supabase.co',
-      anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnaGd4ZmFndGR4Znp5anN5YWV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkyMTI2MTAsImV4cCI6MjA1NDc4ODYxMH0.U70iFiHDvv75ITyLDK_hylHrp51i-R7S3K9wP4qegOg',
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnaGd4ZmFndGR4Znp5anN5YWV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkyMTI2MTAsImV4cCI6MjA1NDc4ODYxMH0.U70iFiHDvv75ITyLDK_hylHrp51i-R7S3K9wP4qegOg',
     );
   }
 
@@ -27,7 +28,6 @@ class SupabaseService {
       );
       return response;
     } catch (e) {
-      print('Signup error: $e');
       rethrow;
     }
   }
@@ -41,9 +41,10 @@ class SupabaseService {
         email: email,
         password: password,
       );
+      print('SignIn Response: ${response.user}');
       return response;
     } catch (e) {
-      print('Login error: $e');
+      print('SignIn Error: $e');
       rethrow;
     }
   }
@@ -51,4 +52,4 @@ class SupabaseService {
   static Future<void> signOut() async {
     await client.auth.signOut();
   }
-} 
+}
