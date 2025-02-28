@@ -4,7 +4,8 @@ class SupabaseService {
   static Future<void> initialize() async {
     await Supabase.initialize(
       url: 'https://ughgxfagtdxfzyjsyaeu.supabase.co',
-      anonKey: 'YOUR_SUPABASE_ANON_KEY', // 🔒 Store this securely!
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnaGd4ZmFndGR4Znp5anN5YWV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkyMTI2MTAsImV4cCI6MjA1NDc4ODYxMH0.U70iFiHDvv75ITyLDK_hylHrp51i-R7S3K9wP4qegOg', // 🔒 Store this securely!
     );
   }
 
@@ -45,24 +46,5 @@ class SupabaseService {
 
   static Future<void> signOut() async {
     await client.auth.signOut();
-  }
-
-  static Future<String?> getUserName() async {
-    final user = client.auth.currentUser;
-    if (user != null) {
-      try {
-        final response = await client
-            .from('users') // Replace with your actual table name
-            .select('name')
-            .eq('id', user.id)
-            .single(); // Fetch a single record
-
-        return response['name']; // Correct way to access the name field
-      } catch (error) {
-        print("Error fetching user name: $error");
-        return null;
-      }
-    }
-    return null;
   }
 }

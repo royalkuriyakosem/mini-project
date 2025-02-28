@@ -9,19 +9,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String? _userName;
-
   @override
   void initState() {
     super.initState();
-    _fetchUserName();
-  }
-
-  Future<void> _fetchUserName() async {
-    final name = await SupabaseService.getUserName();
-    setState(() {
-      _userName = name;
-    });
   }
 
   Future<void> _logout(BuildContext context) async {
@@ -38,18 +28,16 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              // Implement logout functionality
+              _logout(context);
             },
           ),
         ],
       ),
-      body: Center(
-        child: _userName != null
-            ? Text(
-                'Welcome, $_userName!',
-                style: const TextStyle(fontSize: 24),
-              )
-            : const CircularProgressIndicator(), // Show loading indicator while fetching
+      body: const Center(
+        child: Text(
+          'Welcome!',
+          style: TextStyle(fontSize: 24),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
