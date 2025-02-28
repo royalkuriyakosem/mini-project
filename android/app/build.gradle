@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace "com.example.aidify"  // <-- Remove the '=' sign
+    namespace "com.example.aidify"  // Corrected syntax
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 

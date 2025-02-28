@@ -13,8 +13,8 @@ import 'screens/ocr_screen.dart';
 import 'screens/language_translation_screen.dart';
 import 'screens/sign_language_recognition_screen.dart';
 import 'screens/text_to_speech_screen.dart';
-import 'screens/object_detection_screen.dart';
-import 'screens/translate_screen.dart'; // Add this import
+import 'screens/object_detection_screen.dart';  // Add this import
+import 'screens/translate_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
