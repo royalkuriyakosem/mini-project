@@ -12,7 +12,9 @@ import 'screens/color_detection_screen.dart';
 import 'screens/ocr_screen.dart';
 import 'screens/language_translation_screen.dart';
 import 'screens/sign_language_recognition_screen.dart';
-import 'screens/text_to_speech_screen.dart'; // Import the TextToSpeechScreen
+import 'screens/text_to_speech_screen.dart';
+import 'screens/object_detection_screen.dart';
+import 'screens/translate_screen.dart'; // Add this import
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -80,6 +82,9 @@ class _AidifyAppState extends State<AidifyApp> {
             const SignLanguageRecognitionScreen(),
         '/text_to_speech': (context) =>
             const TextToSpeechScreen(), // Add the route
+        '/object_detection': (context) =>
+            const ObjectDetectionScreen(), // Add this route
+        '/translate': (context) => const TranslateScreen(), // Add this route
       },
     );
   }

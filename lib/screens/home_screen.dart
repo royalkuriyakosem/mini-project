@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:aidify/services/supabase_service.dart';
+import 'translate_screen.dart'; // Add this import
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -40,10 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
           _buildGridItem(context, Icons.home, 'Home', '/home'),
           _buildGridItem(
               context, Icons.text_fields, 'Text to Speech', '/text_to_speech'),
-          _buildGridItem(context, Icons.mic, 'Speech to Text',
-              '/speech_to_text'), // Change Payments to Speech to Text
-          _buildGridItem(context, Icons.document_scanner, 'Doc', '/doc'),
-          // Add more grid items here as needed
+          _buildGridItem(
+              context, Icons.mic, 'Speech to Text', '/speech_to_text'),
+          _buildGridItem(context, Icons.document_scanner, 'Object Detection',
+              '/object_detection'),
+          _buildGridItem(context, Icons.translate, 'Translate',
+              '/translate'), // Add this line
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
