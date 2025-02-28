@@ -1,4 +1,3 @@
-// filepath: /C:/Edge/StepUp/lib/screens/color_detection_screen.dart
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -37,6 +36,10 @@ class _ColorDetectionScreenState extends State<ColorDetectionScreen> {
     });
   }
 
+  String _colorToHex(Color color) {
+    return '#${color.value.toRadixString(16).padLeft(8, '0').toUpperCase()}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,36 +47,51 @@ class _ColorDetectionScreenState extends State<ColorDetectionScreen> {
         title: const Text('Color Detection'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _image == null
-                ? const Text('No image selected.')
-                : Image.file(_image!),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _pickImage,
-              child: const Text('Pick Image'),
-            ),
-            const SizedBox(height: 20),
-            _detectedColor == null
-                ? Container()
-                : Container(
-                    width: 100,
-                    height: 100,
-                    color: _detectedColor,
-                    child: Center(
-                      child: Text(
-                        'Detected Color',
-                        style: TextStyle(
-                          color: useWhiteForeground(_detectedColor!)
-                              ? Colors.white
-                              : Colors.black,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _image == null
+                  ? const Text('No image selected.')
+                  : Image.file(_image!),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _pickImage,
+                child: const Text('Pick Image'),
+              ),
+              const SizedBox(height: 20),
+              _detectedColor == null
+                  ? Container()
+                  : Column(
+                      children: [
+                        Container(
+                          width: 100,
+                          height: 100,
+                          color: _detectedColor,
+                          child: Center(
+                            child: Text(
+                              'Detected Color',
+                              style: TextStyle(
+                                color: useWhiteForeground(_detectedColor!)
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                        const SizedBox(height: 10),
+                        Text(
+                          'Color: ${_colorToHex(_detectedColor!)}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: _detectedColor,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-          ],
+            ],
+          ),
         ),
       ),
     );

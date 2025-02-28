@@ -15,7 +15,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   bool _isLoading = false;
 
   Future<void> _signUp() async {
@@ -27,12 +28,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           password: passwordController.text,
           fullName: nameController.text,
         );
-        
+
         if (mounted) {
           if (response.user != null) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('Please check your email to confirm your account'),
+                content:
+                    Text('Please check your email to confirm your account'),
                 backgroundColor: Colors.green,
               ),
             );
@@ -61,27 +63,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Sign Up')),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16.0),
         child: Center(
           child: SingleChildScrollView(
             child: Form(
               key: _formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Center(
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  const Text(
+                    'Create an Account',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 20),
-
-                  // Name Field
                   TextFormField(
                     controller: nameController,
-                    decoration: const InputDecoration(labelText: 'Full Name'),
+                    decoration: InputDecoration(
+                      labelText: 'Full Name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your name';
@@ -89,28 +96,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 15),
-
-                  // Email Field
+                  const SizedBox(height: 20),
                   TextFormField(
                     controller: emailController,
-                    decoration: const InputDecoration(labelText: 'Email'),
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter an email';
-                      } else if (!RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+').hasMatch(value)) {
+                      } else if (!RegExp(
+                              r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+')
+                          .hasMatch(value)) {
                         return 'Enter a valid email';
                       }
                       return null;
                     },
                   ),
-                  const SizedBox(height: 15),
-
-                  // Password Field
+                  const SizedBox(height: 20),
                   TextFormField(
                     controller: passwordController,
-                    decoration: const InputDecoration(labelText: 'Password'),
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.length < 6) {
@@ -119,12 +134,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 15),
-
-                  // Confirm Password Field
+                  const SizedBox(height: 20),
                   TextFormField(
                     controller: confirmPasswordController,
-                    decoration: const InputDecoration(labelText: 'Confirm Password'),
+                    decoration: InputDecoration(
+                      labelText: 'Confirm Password',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
                     obscureText: true,
                     validator: (value) {
                       if (value != passwordController.text) {
@@ -134,28 +152,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   const SizedBox(height: 30),
-
-                  // Sign Up Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: _isLoading ? null : _signUp,
-                      child: _isLoading
-                          ? const CircularProgressIndicator()
-                          : const Text('Sign Up', style: TextStyle(fontSize: 18)),
-                    ),
-                  ),
-
-                  const SizedBox(height: 15),
-
-                  // Back to Login
-                  Center(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/login');
-                      },
-                      child: const Text('Already have an account? Log in'),
-                    ),
+                  _isLoading
+                      ? const CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: _signUp,
+                          child: const Text('Sign Up'),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 15),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                        ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Already have an account?'),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/login');
+                        },
+                        child: const Text('Log in'),
+                      ),
+                    ],
                   ),
                 ],
               ),
