@@ -36,8 +36,44 @@ class _ColorDetectionScreenState extends State<ColorDetectionScreen> {
     });
   }
 
-  String _colorToHex(Color color) {
-    return '#${color.value.toRadixString(16).padLeft(8, '0').toUpperCase()}';
+  String _colorToName(Color color) {
+    // Define a map of color names to their approximate RGB values
+    const colorNames = {
+      'Black': Color(0xFF000000),
+      'White': Color(0xFFFFFFFF),
+      'Red': Color(0xFFFF0000),
+      'Green': Color(0xFF00FF00),
+      'Blue': Color(0xFF0000FF),
+      'Yellow': Color(0xFFFFFF00),
+      'Cyan': Color(0xFF00FFFF),
+      'Magenta': Color(0xFFFF00FF),
+      'Gray': Color(0xFF808080),
+      'Maroon': Color(0xFF800000),
+      'Olive': Color(0xFF808000),
+      'Purple': Color(0xFF800080),
+      'Teal': Color(0xFF008080),
+      'Navy': Color(0xFF000080),
+    };
+
+    // Find the closest color name
+    String closestColorName = 'Unknown';
+    double closestDistance = double.infinity;
+
+    colorNames.forEach((name, value) {
+      double distance = _colorDistance(color, value);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestColorName = name;
+      }
+    });
+
+    return closestColorName;
+  }
+
+  double _colorDistance(Color c1, Color c2) {
+    return sqrt(pow(c1.red - c2.red, 2) +
+        pow(c1.green - c2.green, 2) +
+        pow(c1.blue - c2.blue, 2));
   }
 
   @override
@@ -81,7 +117,7 @@ class _ColorDetectionScreenState extends State<ColorDetectionScreen> {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          'Color: ${_colorToHex(_detectedColor!)}',
+                          'Color: ${_colorToName(_detectedColor!)}',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

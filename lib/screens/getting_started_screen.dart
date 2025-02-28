@@ -40,9 +40,9 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
       body: PageView(
         controller: _pageController,
         children: [
-          _buildPage('Welcome to Aidify!', 'Your personal assistant for accessibility.', 'assets/images/welcome.png'),
+          _buildPage('Welcome to StepUp!', 'Your personal assistant for accessibility.', 'assets/images/welcome.png'),
           _buildPage('Features', 'Explore various features like text-to-speech, object detection, and more.', 'assets/images/features.png'),
-          _buildPage('Get Started', 'Let\'s get started with Aidify!', 'assets/images/get_started.png'),
+          _buildPage('Get Started', 'Let\'s get started with StepUp!', 'assets/images/get_started.png'),
           _buildDarkModeSelectionPage(), // New page for dark mode selection
         ],
       ),

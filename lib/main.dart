@@ -1,6 +1,6 @@
 // filepath: /C:/Edge/StepUp/lib/main.dart
-import 'package:aidify/screens/home_screen.dart';
-import 'package:aidify/screens/speech_to_text_screen.dart';
+import 'package:StepUp/screens/home_screen.dart';
+import 'package:StepUp/screens/speech_to_text_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'services/settings_service.dart';
