@@ -1,6 +1,8 @@
+// filepath: /C:/Edge/StepUp/lib/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:aidify/services/supabase_service.dart';
 import 'translate_screen.dart'; // Add this import
+import 'speech_to_text_screen.dart'; // Import the new screen
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -47,6 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
               '/object_detection'),
           _buildGridItem(context, Icons.translate, 'Translate',
               '/translate'), // Add this line
+          _buildGridItem(context, Icons.color_lens, 'Color Detection',
+              '/color-detection'), // Add this line
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

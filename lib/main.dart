@@ -1,3 +1,6 @@
+// filepath: /C:/Edge/StepUp/lib/main.dart
+import 'package:aidify/screens/home_screen.dart';
+import 'package:aidify/screens/speech_to_text_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'services/settings_service.dart';
@@ -5,7 +8,6 @@ import 'services/supabase_service.dart';
 import 'services/auth_state_handler.dart';
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
-import 'screens/home_screen.dart';
 import 'screens/splash_screen.dart';
 import 'screens/getting_started_screen.dart';
 import 'screens/color_detection_screen.dart';
@@ -13,8 +15,9 @@ import 'screens/ocr_screen.dart';
 import 'screens/language_translation_screen.dart';
 import 'screens/sign_language_recognition_screen.dart';
 import 'screens/text_to_speech_screen.dart';
-import 'screens/object_detection_screen.dart';  // Add this import
+import 'screens/object_detection_screen.dart'; // Add this import
 import 'screens/translate_screen.dart';
+import 'screens/speech_to_text_screen.dart'; // Import the new screen
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -80,11 +83,11 @@ class _AidifyAppState extends State<AidifyApp> {
         '/language-translation': (context) => const LanguageTranslationScreen(),
         '/sign-language-recognition': (context) =>
             const SignLanguageRecognitionScreen(),
-        '/text_to_speech': (context) =>
-            const TextToSpeechScreen(), // Add the route
-        '/object_detection': (context) =>
-            const ObjectDetectionScreen(), // Add this route
-        '/translate': (context) => const TranslateScreen(), // Add this route
+        '/text_to_speech': (context) => const TextToSpeechScreen(),
+        '/object_detection': (context) => const ObjectDetectionScreen(),
+        '/translate': (context) => const TranslateScreen(),
+        '/speech_to_text': (context) =>
+            const SpeechToTextScreen(), // Add the route for Speech to Text
       },
     );
   }
