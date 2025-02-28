@@ -33,22 +33,31 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: const Center(
-        child: Text(
-          'Welcome!',
-          style: TextStyle(fontSize: 24),
-        ),
+      body: GridView.count(
+        crossAxisCount: 2,
+        padding: const EdgeInsets.all(16.0),
+        children: [
+          _buildGridItem(context, Icons.home, 'Home', '/home'),
+          _buildGridItem(
+              context, Icons.text_fields, 'Text to Speech', '/text_to_speech'),
+          _buildGridItem(context, Icons.mic, 'Speech to Text',
+              '/speech_to_text'), // Change Payments to Speech to Text
+          _buildGridItem(context, Icons.document_scanner, 'Doc', '/doc'),
+          // Add more grid items here as needed
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.accessibility), label: 'Quick Access'),
-          BottomNavigationBarItem(icon: Icon(Icons.payment), label: 'Payments'),
+              icon: Icon(Icons.text_fields), label: 'Text to Speech'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.mic),
+              label: 'Speech to Text'), // Change Payments to Speech to Text
           BottomNavigationBarItem(
               icon: Icon(Icons.document_scanner), label: 'Doc'),
         ],
-        currentIndex: 1, // Set the current index to Quick Access
+        currentIndex: 1, // Set the current index to Text to Speech
         onTap: (index) {
           // Handle bottom navigation tap
         },

@@ -12,7 +12,7 @@ import 'screens/color_detection_screen.dart';
 import 'screens/ocr_screen.dart';
 import 'screens/language_translation_screen.dart';
 import 'screens/sign_language_recognition_screen.dart';
-import 'screens/accessibility_settings_screen.dart';
+import 'screens/text_to_speech_screen.dart'; // Import the TextToSpeechScreen
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -72,13 +72,14 @@ class _AidifyAppState extends State<AidifyApp> {
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/home': (context) => const HomeScreen(),
-        '/settings': (context) => const AccessibilitySettingsScreen(),
         '/splash': (context) => const SplashScreen(),
         '/color-detection': (context) => const ColorDetectionScreen(),
         '/ocr': (context) => const OCRScreen(),
         '/language-translation': (context) => const LanguageTranslationScreen(),
         '/sign-language-recognition': (context) =>
             const SignLanguageRecognitionScreen(),
+        '/text_to_speech': (context) =>
+            const TextToSpeechScreen(), // Add the route
       },
     );
   }
