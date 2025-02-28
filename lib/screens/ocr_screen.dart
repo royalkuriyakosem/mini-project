@@ -28,6 +28,7 @@ class _OCRScreenState extends State<OCRScreen> {
     final cameras = await availableCameras();
     _controller = CameraController(cameras[0], ResolutionPreset.high);
     _initializeControllerFuture = _controller.initialize();
+    setState(() {}); // Update the state after initialization
   }
 
   Future<void> _speakText(String text) async {

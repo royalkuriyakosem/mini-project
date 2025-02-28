@@ -9,85 +9,53 @@ class GettingStartedScreen extends StatefulWidget {
 }
 
 class _GettingStartedScreenState extends State<GettingStartedScreen> {
+  bool _isDarkMode = false;
   final PageController _pageController = PageController();
-  int _currentPage = 0;
 
   @override
   void initState() {
     super.initState();
+    _loadDarkModePreference();
   }
 
-  Future<void> _markAsSeen() async {
+  Future<void> _loadDarkModePreference() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('hasSeenGettingStarted', true);
+    setState(() {
+      _isDarkMode = prefs.getBool('isDarkMode') ?? false;
+    });
+  }
+
+  Future<void> _setDarkMode(bool isDarkMode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkMode', isDarkMode);
+    setState(() {
+      _isDarkMode = isDarkMode;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _isDarkMode ? Colors.black : Colors.white,
       body: PageView(
         controller: _pageController,
-        onPageChanged: (int page) {
-          setState(() {
-            _currentPage = page;
-          });
-        },
         children: [
-          _buildPage(
-            context,
-            'Welcome to Aidify',
-            'Your personal assistant for accessibility.',
-            'assets/images/welcome.png', // Replace with your asset path
-          ),
-          _buildPage(
-            context,
-            'Features',
-            'Explore various features like text-to-speech, object detection, and more.',
-            'assets/images/features.png', // Replace with your asset path
-          ),
-          _buildPage(
-            context,
-            'Get Started',
-            'Let\'s get started with Aidify!',
-            'assets/images/get_started.png', // Replace with your asset path
-          ),
+          _buildPage('Welcome to Aidify!', 'Your personal assistant for accessibility.', 'assets/images/welcome.png'),
+          _buildPage('Features', 'Explore various features like text-to-speech, object detection, and more.', 'assets/images/features.png'),
+          _buildPage('Get Started', 'Let\'s get started with Aidify!', 'assets/images/get_started.png'),
+          _buildDarkModeSelectionPage(), // New page for dark mode selection
         ],
       ),
-      bottomSheet: _currentPage == 2
-          ? TextButton(
-              onPressed: () async {
-                await _markAsSeen();
-                Navigator.pushReplacementNamed(context, '/login');
-              },
-              child: const Text(
-                'Finish',
-                style: TextStyle(fontSize: 18),
-              ),
-            )
-          : TextButton(
-              onPressed: () {
-                _pageController.nextPage(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeIn,
-                );
-              },
-              child: const Text(
-                'Next',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
     );
   }
 
-  Widget _buildPage(BuildContext context, String title, String description,
-      String imagePath) {
+  Widget _buildPage(String title, String description, String imagePath) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(imagePath,
-              height: 250), // Ensure you have these images in your assets
+          Image.asset(imagePath, height: 250),
           const SizedBox(height: 20),
           Text(
             title,
@@ -103,5 +71,40 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
         ],
       ),
     );
+  }
+
+  Widget _buildDarkModeSelectionPage() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Do you want to use dark mode?',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 20),
+          TextButton(
+            onPressed: () {
+              _setDarkMode(false);
+              _navigateToLogin();
+            },
+            child: const Text('No', style: TextStyle(fontSize: 18)),
+          ),
+          TextButton(
+            onPressed: () {
+              _setDarkMode(true);
+              _navigateToLogin();
+            },
+            child: const Text('Yes', style: TextStyle(fontSize: 18)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _navigateToLogin() {
+    Navigator.of(context).pushReplacementNamed('/login');
   }
 }
