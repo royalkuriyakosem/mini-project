@@ -1,4 +1,4 @@
-# aidify
+# StepUp
 
 A new Flutter project.
 
