@@ -40,17 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisCount: 2,
         padding: const EdgeInsets.all(16.0),
         children: [
-          _buildGridItem(context, Icons.home, 'Home', '/home'),
           _buildGridItem(
               context, Icons.text_fields, 'Text to Speech', '/text_to_speech'),
           _buildGridItem(
               context, Icons.mic, 'Speech to Text', '/speech_to_text'),
-          _buildGridItem(context, Icons.document_scanner, 'Object Detection',
-              '/object_detection'),
-          _buildGridItem(context, Icons.translate, 'Translate',
-              '/translate'), // Add this line
-          _buildGridItem(context, Icons.color_lens, 'Color Detection',
-              '/color-detection'), // Add this line
+          _buildGridItem(context, Icons.translate, 'Translate', '/translate'),
+          _buildGridItem(
+              context, Icons.color_lens, 'Color Detection', '/color-detection'),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
