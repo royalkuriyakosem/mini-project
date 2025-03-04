@@ -30,14 +30,25 @@ class _TextToSpeechScreenState extends State<TextToSpeechScreen> {
           children: [
             TextField(
               controller: _textController,
+              maxLines: 5, // Enlarge the text area
               decoration: const InputDecoration(
                 labelText: 'Enter text to convert to speech',
+                labelStyle: TextStyle(fontSize: 20), // Enlarge the label text
+                border: OutlineInputBorder(), // Add border to the text field
               ),
+              style: const TextStyle(fontSize: 18), // Enlarge the input text
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _speakText,
-              child: const Text('Convert to Speech'),
+              child: const Text(
+                'Convert to Speech',
+                style: TextStyle(fontSize: 18), // Enlarge the button text
+              ),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 24, vertical: 12), // Enlarge the button
+              ),
             ),
           ],
         ),
