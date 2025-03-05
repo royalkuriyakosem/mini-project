@@ -1,19 +1,64 @@
-# StepUp
+# Aidify - AI-Based Smart Assistant for Differently-Abled Individuals
 
-A new Flutter project.
+Aidify is an AI-powered smart assistant designed to empower differently-abled individuals by enhancing communication, navigation, and independence. Built using Flutter, Aidify leverages machine learning to provide real-time assistance.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **AI-Powered Object Detection** - Helps visually impaired users identify objects and navigate safely.
+- **Speech-to-Text Transcription** - Converts speech into text for individuals with hearing impairments.
+- **Text-to-Speech Synthesis** - Reads out text to assist visually impaired users.
+- **AI Voice Assistant** - Hands-free control and interaction using voice commands.
+- **Customizable Dark Mode** - Enhances accessibility and reduces eye strain.
 
-A few resources to get you started if this is your first Flutter project:
+## Technology Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Framework:** Flutter (Dart)
+- **Backend:** Firebase
+- **APIs & Libraries:** Pre-trained models from Hugging Face
+- **Operating System:** Android (API level 21 and above)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
- main = sanjay
- uiux = sam
- content = noel
+## Hardware Requirements
+
+- **Camera** - For object detection
+- **Microphone** - For speech recognition
+- **Speaker** - For text-to-speech output
+
+## Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repo/Aidify.git
+   cd Aidify
+   ```
+2. Install dependencies:
+   ```sh
+   flutter pub get
+   ```
+3. Run the app:
+   ```sh
+   flutter run
+   ```
+
+## Purpose and Social Impact
+
+- Enhances independence and inclusivity for differently-abled individuals.
+- Bridges communication gaps and fosters social participation.
+- Provides an affordable and accessible assistive technology solution.
+
+## Contributors
+
+- Royal Kuriyakose (FIT22CS160)
+- Sam Ben Johnson (FIT22CS163)
+- Sanjay Njarakkattil (FIT22CS166)
+- Noel Benny (FIT22CS147)
+
+## License
+
+This project is licensed under the MIT License.
+
+## Contact
+
+For inquiries and contributions, please contact the project coordinators:
+- Dr. Siyamol Chirakkarottu
+- Dr. Anil Kumar M N
+- Mrs. Anisha Antu
