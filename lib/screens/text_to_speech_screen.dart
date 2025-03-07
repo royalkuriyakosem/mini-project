@@ -41,13 +41,13 @@ class _TextToSpeechScreenState extends State<TextToSpeechScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _speakText,
-              child: const Text(
-                'Convert to Speech',
-                style: TextStyle(fontSize: 18), // Enlarge the button text
-              ),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 24, vertical: 12), // Enlarge the button
+              ),
+              child: const Text(
+                'Convert to Speech',
+                style: TextStyle(fontSize: 18), // Enlarge the button text
               ),
             ),
           ],

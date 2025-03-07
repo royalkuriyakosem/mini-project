@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class TranslateScreen extends StatefulWidget {
   const TranslateScreen({super.key});
@@ -13,6 +14,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
   final TextEditingController _translatedTextController =
       TextEditingController();
   final GoogleTranslator _translator = GoogleTranslator();
+  final FlutterTts _flutterTts = FlutterTts();
   String _selectedLanguage = 'es'; // Default to Spanish
 
   final Map<String, String> _languages = {
@@ -34,6 +36,12 @@ class _TranslateScreenState extends State<TranslateScreen> {
     setState(() {
       _translatedTextController.text = translation.text;
     });
+  }
+
+  Future<void> _speakText() async {
+    await _flutterTts.setLanguage("en-US");
+    await _flutterTts.setPitch(1.0);
+    await _flutterTts.speak(_translatedTextController.text);
   }
 
   @override
@@ -78,6 +86,18 @@ class _TranslateScreenState extends State<TranslateScreen> {
               readOnly: true,
               decoration: InputDecoration(
                 labelText: 'Translated text',
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _speakText,
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 24, vertical: 12), // Enlarge the button
+              ),
+              child: const Text(
+                'Convert to Speech',
+                style: TextStyle(fontSize: 18), // Enlarge the button text
               ),
             ),
           ],

@@ -16,7 +16,7 @@ import 'screens/language_translation_screen.dart';
 import 'screens/text_to_speech_screen.dart';
 
 import 'screens/translate_screen.dart';
-import 'screens/speech_to_text_screen.dart'; // Import the new screen
+// Import the new screen
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {

@@ -156,7 +156,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ? const CircularProgressIndicator()
                       : ElevatedButton(
                           onPressed: _signUp,
-                          child: const Text('Sign Up'),
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 50, vertical: 15),
@@ -164,6 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
+                          child: const Text('Sign Up'),
                         ),
                   const SizedBox(height: 20),
                   Row(

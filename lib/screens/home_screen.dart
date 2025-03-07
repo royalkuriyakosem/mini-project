@@ -1,8 +1,8 @@
 // filepath: /C:/Edge/StepUp/lib/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:StepUp/services/supabase_service.dart';
-import 'translate_screen.dart'; // Add this import
-import 'speech_to_text_screen.dart'; // Import the new screen
+// Add this import
+// Import the new screen
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
