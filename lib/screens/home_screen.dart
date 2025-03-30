@@ -1,6 +1,6 @@
 // filepath: /C:/Edge/StepUp/lib/screens/home_screen.dart
 import 'package:flutter/material.dart';
-import 'package:StepUp/services/supabase_service.dart';
+import 'package:aidify/services/supabase_service.dart';
 // Add this import
 // Import the new screen
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:StepUp/services/supabase_service.dart';
+import 'package:aidify/services/supabase_service.dart';
 import 'signup_screen.dart'; // Import Sign Up screen
 
 class LoginScreen extends StatefulWidget {
