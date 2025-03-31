@@ -22,8 +22,24 @@ Aidify is an AI-powered smart assistant designed to empower differently-abled in
 - **Camera** - For object detection
 - **Microphone** - For speech recognition
 - **Speaker** - For text-to-speech output
+## Installation backend
 
-## Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repo/Aidify.git
+   cd backend
+   ```
+2. Install dependencies:
+   ```sh
+   pip install -r requirements.txt
+   pip install fastapi uvicorn pillow
+   pip install python-multipart
+   ```
+3. Run the server:
+   ```sh
+   uvicorn app:app --host 0.0.0.0 --port 8000
+   ```
+## Installation fronend
 
 1. Clone the repository:
    ```sh
