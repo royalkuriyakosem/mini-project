@@ -32,15 +32,18 @@ class _LanguageTranslationScreenState extends State<LanguageTranslationScreen> {
   }
 
   Future<void> _pickImage() async {
-    final pickedFile =
-        await ImagePicker().getImage(source: ImageSource.gallery);
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
     if (pickedFile != null) {
       // Implement OCR processing on the picked image
       // For example, use a library like Tesseract to extract text
       String extractedText = "Extracted text from image"; // Placeholder
-      _textController.text =
-          extractedText; // Set extracted text to the text field
+      _textController.text = extractedText; // Set extracted text to the text field
       await _translateText(); // Automatically translate the extracted text
+    } else {
+      // Handle the case when no image is selected
+      print('No image selected.');
     }
   }
 

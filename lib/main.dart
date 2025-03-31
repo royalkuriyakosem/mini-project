@@ -11,7 +11,6 @@ import 'screens/signup_screen.dart';
 import 'screens/splash_screen.dart';
 import 'screens/getting_started_screen.dart';
 import 'screens/color_detection_screen.dart';
-import 'screens/ocr_screen.dart';
 import 'screens/language_translation_screen.dart';
 import 'screens/text_to_speech_screen.dart';
 
@@ -78,12 +77,10 @@ class _AidifyAppState extends State<AidifyApp> {
         '/home': (context) => const HomeScreen(),
         '/splash': (context) => const SplashScreen(),
         '/color-detection': (context) => const ColorDetectionScreen(),
-        '/ocr': (context) => const OCRScreen(),
         '/language-translation': (context) => const LanguageTranslationScreen(),
-        
-          
+
         '/text_to_speech': (context) => const TextToSpeechScreen(),
-        
+
         '/translate': (context) => const TranslateScreen(),
         '/speech_to_text': (context) =>
             const SpeechToTextScreen(), // Add the route for Speech to Text
