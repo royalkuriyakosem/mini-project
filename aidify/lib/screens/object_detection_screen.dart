@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class LiveDetectionScreen extends StatefulWidget {
   @override
@@ -14,11 +15,21 @@ class _LiveDetectionScreenState extends State<LiveDetectionScreen> {
   CameraController? _cameraController;
   bool _isDetecting = false;
   List<dynamic>? _detections;
+  final FlutterTts _flutterTts = FlutterTts();
+  String _lastSpokenObject = '';
+  DateTime _lastSpeechTime = DateTime.now();
 
   @override
   void initState() {
     super.initState();
     _initializeCamera();
+    _initializeTts();
+  }
+
+  Future<void> _initializeTts() async {
+    await _flutterTts.setLanguage("en-US");
+    await _flutterTts.setPitch(1.0);
+    await _flutterTts.setVolume(1.0);
   }
 
   Future<void> _initializeCamera() async {
@@ -75,8 +86,38 @@ class _LiveDetectionScreenState extends State<LiveDetectionScreen> {
       setState(() {
         _detections = jsonResponse['detections'];
       });
+      
+      // Speak the detected objects
+      _speakDetectedObjects();
     } else {
       print("Error: ${response.reasonPhrase}");
+    }
+  }
+
+  Future<void> _speakDetectedObjects() async {
+    if (_detections == null || _detections!.isEmpty) return;
+    
+    // Get the object with highest confidence
+    var highestConfidenceObject = _detections!.reduce((curr, next) => 
+      (curr['confidence'] > next['confidence']) ? curr : next);
+    
+    String objectName = highestConfidenceObject['name'];
+    double confidence = highestConfidenceObject['confidence'];
+    
+    // Only speak if it's a different object or if 3 seconds have passed since last speech
+    DateTime now = DateTime.now();
+    if (objectName != _lastSpokenObject || 
+        now.difference(_lastSpeechTime).inSeconds > 3) {
+      
+      // Format the speech text
+      String speechText = "Detected $objectName";
+      
+      // Speak the text
+      await _flutterTts.speak(speechText);
+      
+      // Update tracking variables
+      _lastSpokenObject = objectName;
+      _lastSpeechTime = now;
     }
   }
 
@@ -91,6 +132,7 @@ class _LiveDetectionScreenState extends State<LiveDetectionScreen> {
   void dispose() {
     _isDetecting = false;
     _cameraController?.dispose();
+    _flutterTts.stop();
     super.dispose();
   }
 
