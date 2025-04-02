@@ -15,12 +15,12 @@ import 'screens/language_translation_screen.dart';
 import 'screens/text_to_speech_screen.dart';
 import 'screens/object_detection_screen.dart'; 
 import 'screens/translate_screen.dart';
-// Import the new screen
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   // Ensure Flutter bindings are initialized
   WidgetsFlutterBinding.ensureInitialized();
+  
 
   // Initialize services
   try {

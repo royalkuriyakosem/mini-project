@@ -22,17 +22,24 @@ class _LiveDetectionScreenState extends State<LiveDetectionScreen> {
   }
 
   Future<void> _initializeCamera() async {
-    WidgetsFlutterBinding.ensureInitialized(); // Ensures camera initializes properly
-    final cameras = await availableCameras();
-    _cameraController = CameraController(
-      cameras[0],
-      ResolutionPreset.medium,
-      enableAudio: false,
-    );
-    await _cameraController!.initialize();
-    if (!mounted) return;
-    setState(() {});
-    _startLiveDetection();
+  WidgetsFlutterBinding.ensureInitialized();
+  final cameras = await availableCameras();
+
+  _cameraController = CameraController(
+    cameras[0], // Use the first available camera (usually back)
+    ResolutionPreset.medium,
+    enableAudio: false,
+  );
+
+  await _cameraController!.initialize();
+  if (!mounted) return;
+
+  // Lock the camera preview to portrait mode
+ await _cameraController!.lockCaptureOrientation();
+
+
+  setState(() {});
+  _startLiveDetection();
   }
 
   Future<void> _startLiveDetection() async {
@@ -94,7 +101,10 @@ class _LiveDetectionScreenState extends State<LiveDetectionScreen> {
       body: Column(
         children: [
           _cameraController != null && _cameraController!.value.isInitialized
-              ? CameraPreview(_cameraController!)
+              ? RotatedBox(
+                quarterTurns: 1, // Adjust if needed (1 = 90°, 3 = 270°)
+                child: CameraPreview(_cameraController!),
+              )
               : Center(child: CircularProgressIndicator()),
           Expanded(
             child: _detections != null
