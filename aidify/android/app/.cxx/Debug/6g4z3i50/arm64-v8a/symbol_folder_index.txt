@@ -1,0 +1,1 @@
+C:\mini-project\aidify\build\app\intermediates\cxx\Debug\6g4z3i50\obj\arm64-v8a
