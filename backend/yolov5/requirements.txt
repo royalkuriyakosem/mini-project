@@ -1,7 +1,8 @@
 fastapi
 uvicorn
-torch
-opencv-python
-numpy
 pillow
-pandas
+python-multipart
+opencv-python
+torch
+cvlib
+requests
