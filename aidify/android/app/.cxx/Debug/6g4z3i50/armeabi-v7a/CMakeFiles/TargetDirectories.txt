@@ -1,0 +1,2 @@
+C:/mini-project/aidify/android/app/.cxx/Debug/6g4z3i50/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/mini-project/aidify/android/app/.cxx/Debug/6g4z3i50/armeabi-v7a/CMakeFiles/rebuild_cache.dir

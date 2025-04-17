@@ -1,0 +1,2 @@
+C:/Edge/StepUp/android/app/.cxx/Debug/c4j6y3ip/x86/CMakeFiles/edit_cache.dir
+C:/Edge/StepUp/android/app/.cxx/Debug/c4j6y3ip/x86/CMakeFiles/rebuild_cache.dir
