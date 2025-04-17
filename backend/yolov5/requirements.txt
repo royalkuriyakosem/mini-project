@@ -1,9 +1,9 @@
-fastapi
-uvicorn
-pillow
-python-multipart
-opencv-python
-torch
-cvlib
-requests
-pandas
+fastapi==0.110.0
+uvicorn==0.29.0
+pillow==10.3.0
+python-multipart==0.0.9
+opencv-python-headless==4.9.0.80  # Use headless for servers (no GUI)
+torch==2.2.1
+cvlib==0.2.7
+requests==2.31.0
+pandas==2.2.1
