@@ -13,7 +13,7 @@ Aidify is an AI-powered smart assistant designed to empower differently-abled in
 ## Technology Stack
 
 - **Framework:** Flutter (Dart)
-- **Backend:** Firebase
+- **Backend:** supabase and django FAST API yolov5
 - **APIs & Libraries:** Pre-trained models from Hugging Face
 - **Operating System:** Android (API level 21 and above)
 
